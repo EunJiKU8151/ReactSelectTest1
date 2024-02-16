@@ -12,7 +12,6 @@ const Header = () => {
         type="button"
         onClick={() => {
           alert("다른행동");
-          // console.log("다른행동");
         }}
       >
         다른버튼

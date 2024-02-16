@@ -10,32 +10,31 @@ const Table = () => {
   const handleSelectAll = (e) => {
     if(e.currentTarget.checked) { // selectAll 체크박스가 체크되면
       data.forEach((item) => {
-        setValue(`id.${item}`, true); // 모든 체크박스의 value를 true로
+        setValue(`id.${item}`, true);
+        console.log(item);
       })
     } else {  // selectAll 체크박스가 체크해제되면
       data.forEach((item) => {
-        setValue(`id.${item}`, false);  // 모든 체크박스의 value를 false로
+        setValue(`id.${item}`, false);
       })
     }
   }
   
-  useEffect(
-    () => {
-      if (data.every((item) => watch(`id.${item}`) === true)) {
-        setValue("selectAll", true);
-      } else {
-        setValue("selectAll", false);
-      }
-    },
-    data.map((item) => watch(`id.${item}`))
-  );
+  useEffect(() => {
+    if (data.every((item) => watch(`id.${item}`) === true)) {
+      setValue("selectAll", true);
+    } else {
+      setValue("selectAll", false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ data.map((item) => watch(`id.${item}`))]);
 
   return (
     <>
       <div>
         <input 
           type="checkbox"
-          {...register("selectAll")}  // 전체 체크, 체크해제를 담당하는 체크박스
+          {...register("selectAll")}
           onChange={handleSelectAll}
         />
       </div>
